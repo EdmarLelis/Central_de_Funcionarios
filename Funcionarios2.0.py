@@ -111,7 +111,10 @@ def Cadastrar():
 
             lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
             lista.loc[len(lista)] = [len(lista),nome, int(idade),  cpf, endereco, email, telefone,int(salario), funcao, contratacao]
-            del lista['Unnamed: 0']
+            try:
+                del lista['Unnamed: 0']
+            except:
+                pass
             lista.to_excel('Central_de_funcionarios_T.xlsx')
             messagebox.showinfo( title='Sucesso', message=f'{nome} foi cadastrado com sucesso!')
             janela2.destroy()
@@ -128,6 +131,7 @@ def Cadastrar():
 # Procurar ------------------------------------------------------
 
 def Procurar():
+    
     janela3 = tk.Toplevel()
     janela3.title('cadastrar funcionario')
     janela3.geometry('400x490')
@@ -151,64 +155,64 @@ def Procurar():
     p_entry.place(x=140, y=60)
 
     def procura():
-        #try:
-        procurar = p_entry.get()
+        lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+        
         try:
-            del lista['Unnamed: 0']
+            procurar = p_entry.get()
+            try:
+                del lista['Unnamed: 0']
+            except:
+                pass
+        
+            cpf_df = lista.loc[lista['CPF'] == f'{procurar}']
+            numero = int(cpf_df['INDEX'])
+            
+            n = cpf_df['NOME']
+            nome = n[numero]
+            i = cpf_df['IDADE']
+            idade= i[numero]
+            cpf_lista = cpf_df['CPF']
+            cpf= cpf_lista[numero]
+            e = cpf_df['END']
+            endereco = e[numero]
+            em = cpf_df['EMA']
+            email = em[numero]
+            t = cpf_df['TELEFONE']
+            telefone = t[numero]
+            s = cpf_df['S']
+            salario = s[numero]
+            f = cpf_df['F']
+            funcao = f[numero]
+            c = cpf_df['CON']
+            contratacao = c[numero]
+
+            messagebox.showinfo(title='Sucesso!', message=f'Funcionaro {nome} encontrado!')
+
+            limpar_label = tk.Label(frame2, text=f'', bg='#eee', fg='#000', font='Alereya 8 bold', width=400, height=300)
+            limpar_label.place(x=0, y=150)
+            p_n_label = tk.Label(frame2, text=f'Nome: {nome}', bg='#eee', fg='#000', font='Alereya 8 bold')
+            p_n_label.place(x=0, y=150)
+            p_i_label = tk.Label(frame2, text=f'Idade: {idade}', bg='#eee', fg='#000', font='Alereya 8 bold')
+            p_i_label.place(x=0, y=170)
+            p_cpf_label = tk.Label(frame2, text=f'CPF: {cpf}', bg='#eee', fg='#000', font='Alereya 8 bold')
+            p_cpf_label.place(x=0, y=190)
+            p_e_label = tk.Label(frame2, text=f'Endereço: {endereco}', bg='#eee', fg='#000', font='Alereya 8 bold')
+            p_e_label.place(x=0, y=210)
+            p_em_label = tk.Label(frame2, text=f'E-mail: {email}', bg='#eee', fg='#000', font='Alereya 8 bold')
+            p_em_label.place(x=0, y=230)
+            p_t_label = tk.Label(frame2, text=f'Telefone: {telefone}', bg='#eee', fg='#000', font='Alereya 8 bold')
+            p_t_label.place(x=0, y=250)
+            p_f_label = tk.Label(frame2, text=f'Função: {funcao}', bg='#eee', fg='#000', font='Alereya 8 bold')
+            p_f_label.place(x=0, y=270)
+            p_s_label = tk.Label(frame2, text=f'Saláro: R$ {salario}', bg='#eee', fg='#000', font='Alereya 8 bold')
+            p_s_label.place(x=0, y=290)
+            p_c_label = tk.Label(frame2, text=f'Contratação: {contratacao}', bg='#eee', fg='#000', font='Alereya 8 bold')
+            p_c_label.place(x=0, y=310)
+
         except:
-            passkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-        cpf_df = lista.loc[lista['CPF'] == f'{procurar}']
-        print(cpf_df)
-
-
-        n = cpf_df['NOME']
-        nome = n[0]
-        i = cpf_df['IDADE']
-        idade= i[0]
-        cpf_lista = cpf_df['CPF']
-        cpf= cpf_lista[0]
-        #e = cpf_df['ENDERECO']
-        #endereco = e[0]
-        #em = cpf_df['EMAIL']
-        #email = em[0]
-        t = cpf_df['TELEFONE']
-        telefone = t[0]
-        #s = cpf_df['SALARIO']
-        #salario = s[0]
-        #f = cpf_df['FUNCAO']
-        #funcao = f[0]
-        c = cpf_df['CONTRATACAO']
-        contratacao = c[0]
-
-        messagebox.showinfo(title='Sucesso!', message=f'Funcionaro {nome} encontrado!')
-
-        limpar_label = tk.Label(frame2, text=f'', bg='#eee', fg='#000', font='Alereya 8 bold', width=400, height=300)
-        limpar_label.place(x=0, y=150)
-        p_n_label = tk.Label(frame2, text=f'Nome: {nome}', bg='#eee', fg='#000', font='Alereya 8 bold')
-        p_n_label.place(x=0, y=150)
-        p_i_label = tk.Label(frame2, text=f'Idade: {idade}', bg='#eee', fg='#000', font='Alereya 8 bold')
-        p_i_label.place(x=0, y=170)
-        p_cpf_label = tk.Label(frame2, text=f'CPF: {cpf}', bg='#eee', fg='#000', font='Alereya 8 bold')
-        p_cpf_label.place(x=0, y=190)
-        #p_e_label = tk.Label(frame2, text=f'Endereço: {endereco}', bg='#eee', fg='#000', font='Alereya 8 bold')
-        #p_e_label.place(x=0, y=210)
-        #p_em_label = tk.Label(frame2, text=f'E-mail: {email}', bg='#eee', fg='#000', font='Alereya 8 bold')
-        #p_em_label.place(x=0, y=230)
-        p_t_label = tk.Label(frame2, text=f'Telefone: {telefone}', bg='#eee', fg='#000', font='Alereya 8 bold')
-        p_t_label.place(x=0, y=250)
-        p_f_label = tk.Label(frame2, text=f'Função: {funcao}', bg='#eee', fg='#000', font='Alereya 8 bold')
-        p_f_label.place(x=0, y=270)
-        #p_s_label = tk.Label(frame2, text=f'Saláro: {salario}', bg='#eee', fg='#000', font='Alereya 8 bold')
-        #p_s_label.place(x=0, y=290)
-        p_c_label = tk.Label(frame2, text=f'Contratação: {contratacao}', bg='#eee', fg='#000', font='Alereya 8 bold')
-        p_c_label.place(x=0, y=310)
-
-        #except:
-            #limpar_label = tk.Label(frame2, text=f'', bg='#eee', fg='#000', font='Alereya 8 bold', width=400, height=300)
-            #limpar_label.place(x=0, y=150)
-            #messagebox.showerror(title='ERRO', message='Não encntrado! Lembre-se de colocar os "." e o "-" de forma correta!')
-
-    # possivelmente colocar informações em outro frame.
+            limpar_label = tk.Label(frame2, text=f'', bg='#eee', fg='#000', font='Alereya 8 bold', width=400, height=300)
+            limpar_label.place(x=0, y=150)
+            messagebox.showerror(title='ERRO', message='Não encntrado! Lembre-se de colocar os "." e o "-" de forma correta!')
 
     p_button = atk.Button3d(frame2, text= 'Procurar', bg='#000', fg='#fff', command= procura)
     p_button.place(x=155, y=90)
