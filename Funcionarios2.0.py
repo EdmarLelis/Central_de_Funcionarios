@@ -2,6 +2,7 @@ import pandas as pd
 import tkinter as tk
 from tkinter import *
 import awesometkinter as atk
+from os import replace
 from tkinter import messagebox
 
 
@@ -133,7 +134,7 @@ def Cadastrar():
 def Procurar():
     
     janela3 = tk.Toplevel()
-    janela3.title('cadastrar funcionario')
+    janela3.title('procurar funcionario')
     janela3.geometry('400x490')
     janela3.configure( bg='#eee')
 
@@ -208,6 +209,78 @@ def Procurar():
             p_s_label.place(x=0, y=290)
             p_c_label = tk.Label(frame2, text=f'Contratação: {contratacao}', bg='#eee', fg='#000', font='Alereya 8 bold')
             p_c_label.place(x=0, y=310)
+            
+            def editar():
+                janela4 = tk.Toplevel()
+                janela4.title('EDITAR INFORMAÇÕES')
+                janela4.geometry('400x490')
+                janela4.configure( bg='#eee')
+                
+                def editar_nome():
+                    janela5 = tk.Toplevel()
+                    janela5.title('EDITAR NOME')
+                    janela5.geometry('200x290')
+                    janela5.configure( bg='#eee')
+                    
+                    n_entry = tk.Entry(janela5, width=20, justify='center')
+                    n_entry.place(x = 80, y = 100)
+
+                    def aplicar():
+                        novo = n_entry.get()
+                        lista = lista.apply(lambda x: x.replace(f"{nome}",f"{novo}"))
+                    
+                    b_aplicar = atk.Button3d(janela5, tex='Aplicar', bg='#000', command=aplicar)
+                    
+                    
+                # Frame cima 1 -----------------------------------------------------------
+
+                frame1 = Frame(janela4, width=400, height=49, bg='#000')
+                frame1.place(x=0, y=0)
+                l_titulo = Label(frame1, text='EDIÇÃO DE INFORMAÇÕES', bg='#000', fg='#fff', font='Anton 16 bold')
+                l_titulo.place(x=55, y=14)
+
+                # Frame meio 1 -----------------------------------------------------------
+
+                frame2 = Frame(janela4, width=400, height=401, bg='#eee')
+                frame2.place(x=0, y=49)
+
+                n_button = atk.Button3d(frame2, text='Nome*', bg='#000', command=editar_nome)
+                n_button.place(x=55, y=49)
+
+                i_button = atk.Button3d(frame2, text='Idade*', bg='#000')
+                i_button.place(x=55, y=95)
+                
+                cpf_button = atk.Button3d(frame2, text='CPF*', bg='#000')
+                cpf_button.place(x=55, y=150)
+                
+                e_button = atk.Button3d(frame2, text='Endereço*', bg='#000')
+                e_button.place(x=55, y=205)
+                
+                em_button = atk.Button3d(frame2, text='E-mail*', bg='#000')
+                em_button.place(x=55, y=260)
+                
+                t_button = atk.Button3d(frame2, text='Telefone*', bg='#000')
+                t_button.place(x=55, y=315)
+                
+                s_button = atk.Button3d(frame2, text='Salario*', bg='#000')
+                s_button.place(x=245, y=49)
+
+                f_button = atk.Button3d(frame2, text='Função*', bg='#000')
+                f_button.place(x=245, y=95)
+                
+                c_button = atk.Button3d(frame2, text='Contratação*', bg='#000')
+                c_button.place(x=245, y=150)
+
+                # Frame baixo 1 -----------------------------------------------------------
+
+                frame3 = Frame(janela4, width=400, height=40, bg='#000')
+                frame3.place(x=0, y=450)
+
+                l_rodape= Label(frame3, bg='#000', fg='#fff', text='created by Edmar Lelis L. JR.', font='Alereya 8 bold italic')
+                l_rodape.place(x=120, y=10)       
+                     
+            editar_b = atk.Button3d(frame2, text='Editar', bg='#000', fg='#fff', command= editar)
+            editar_b.place(x=155, y=340)
 
         except:
             limpar_label = tk.Label(frame2, text=f'', bg='#eee', fg='#000', font='Alereya 8 bold', width=400, height=300)
