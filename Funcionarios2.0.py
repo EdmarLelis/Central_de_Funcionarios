@@ -233,7 +233,10 @@ def Procurar():
                     def aplicar():
                         novo = n_entry.get()
                         lista.iat[numero, 1] = novo
-                        print(lista)
+                        lista.to_excel('Central_de_funcionarios_T.xlsx')
+                        messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
+                        janela4.destroy()
+                        janela5.destroy()
                     
                     b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
                     b_aplicar.place(x=80, y=130)
