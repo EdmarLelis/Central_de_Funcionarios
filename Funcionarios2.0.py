@@ -217,20 +217,26 @@ def Procurar():
                 janela4.configure( bg='#eee')
                 
                 def editar_nome():
+                    lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+                    try:
+                        del lista['Unnamed: 0']
+                    except:
+                        pass
                     janela5 = tk.Toplevel()
                     janela5.title('EDITAR NOME')
-                    janela5.geometry('200x290')
-                    janela5.configure( bg='#eee')
+                    janela5.geometry('400x290')
+                    janela5.configure( bg='#fff')
                     
                     n_entry = tk.Entry(janela5, width=20, justify='center')
-                    n_entry.place(x = 80, y = 100)
+                    n_entry.place(x = 80, y = 70)
 
                     def aplicar():
                         novo = n_entry.get()
-                        lista = lista.apply(lambda x: x.replace(f"{nome}",f"{novo}"))
+                        lista.iat[numero, 1] = novo
+                        print(lista)
                     
-                    b_aplicar = atk.Button3d(janela5, tex='Aplicar', bg='#000', command=aplicar)
-                    
+                    b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
+                    b_aplicar.place(x=80, y=130)
                     
                 # Frame cima 1 -----------------------------------------------------------
 
