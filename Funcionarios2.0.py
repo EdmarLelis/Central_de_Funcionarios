@@ -12,6 +12,7 @@ janela.title('Funcinarios Central')
 janela.geometry('400x490')
 janela.configure( bg='#fff')
 lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+janela.resizable(width=False, height=False)
 
 # Cadastrar ------------------------------------------------------
 
@@ -21,6 +22,8 @@ def Cadastrar():
     janela2.title('cadastrar funcionario')
     janela2.geometry('400x490')
     janela2.configure( bg='#fff')
+    janela2.resizable(width=False, height=False)
+    
     
     # Frame cima 2 -----------------------------------------------------------
 
@@ -137,7 +140,8 @@ def Procurar():
     janela3.title('procurar funcionario')
     janela3.geometry('400x490')
     janela3.configure( bg='#eee')
-
+    janela3.resizable(width=False, height=False)
+    
     # Frame cima 3 -----------------------------------------------------------
 
     frame1 = Frame(janela3, width=400, height=49, bg='#000')
@@ -215,6 +219,7 @@ def Procurar():
                 janela4.title('EDITAR INFORMAÇÕES')
                 janela4.geometry('400x490')
                 janela4.configure( bg='#eee')
+                janela4.resizable(width=False, height=False)
                 
                 def editar_nome():
                     lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
@@ -225,10 +230,11 @@ def Procurar():
                     janela5 = tk.Toplevel()
                     janela5.title('EDITAR NOME')
                     janela5.geometry('400x290')
-                    janela5.configure( bg='#fff')
+                    janela5.configure( bg='#eee')
+                    janela5.resizable(width=False, height=False)
                     
                     n_entry = tk.Entry(janela5, width=20, justify='center')
-                    n_entry.place(x = 80, y = 70)
+                    n_entry.place(x = 140, y = 100)
 
                     def aplicar():
                         novo = n_entry.get()
@@ -237,9 +243,217 @@ def Procurar():
                         messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
                         janela4.destroy()
                         janela5.destroy()
+                        
+                    b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
+                    b_aplicar.place(x=155, y=160)
+                        
+                def editar_idade():
+                    lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+                    try:
+                        del lista['Unnamed: 0']
+                    except:
+                        pass
+                    janela5 = tk.Toplevel()
+                    janela5.title('EDITAR IDADE')
+                    janela5.geometry('400x290')
+                    janela5.configure( bg='#eee')
+                    janela5.resizable(width=False, height=False)
+                    
+                    n_entry = tk.Entry(janela5, width=20, justify='center')
+                    n_entry.place(x = 140, y = 100)
+
+                    def aplicar():
+                        novo = n_entry.get()
+                        lista.iat[numero, 2] = novo
+                        lista.to_excel('Central_de_funcionarios_T.xlsx')
+                        messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
+                        janela4.destroy()
+                        janela5.destroy()
                     
                     b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
-                    b_aplicar.place(x=80, y=130)
+                    b_aplicar.place(x=155, y=160)
+                        
+                def editar_cpf():
+                    lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+                    try:
+                        del lista['Unnamed: 0']
+                    except:
+                        pass
+                    janela5 = tk.Toplevel()
+                    janela5.title('EDITAR CPF')
+                    janela5.geometry('400x290')
+                    janela5.configure( bg='#eee')
+                    janela5.resizable(width=False, height=False)
+                    
+                    n_entry = tk.Entry(janela5, width=20, justify='center')
+                    n_entry.place(x = 140, y = 100)
+
+                    def aplicar():
+                        novo = n_entry.get()
+                        lista.iat[numero, 3] = novo
+                        lista.to_excel('Central_de_funcionarios_T.xlsx')
+                        messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
+                        janela4.destroy()
+                        janela5.destroy()
+                        
+                    b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
+                    b_aplicar.place(x=155, y=160)
+                        
+                def editar_endereco():
+                    lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+                    try:
+                        del lista['Unnamed: 0']
+                    except:
+                        pass
+                    janela5 = tk.Toplevel()
+                    janela5.title('EDITAR ENDEREÇO')
+                    janela5.geometry('400x290')
+                    janela5.configure( bg='#eee')
+                    janela5.resizable(width=False, height=False)
+                    
+                    n_entry = tk.Entry(janela5, width=20, justify='center')
+                    n_entry.place(x = 140, y = 100)
+
+                    def aplicar():
+                        novo = n_entry.get()
+                        lista.iat[numero, 4] = novo
+                        lista.to_excel('Central_de_funcionarios_T.xlsx')
+                        messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
+                        janela4.destroy()
+                        janela5.destroy()
+                        
+                    b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
+                    b_aplicar.place(x=155, y=160)
+                        
+                def editar_email():
+                    lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+                    try:
+                        del lista['Unnamed: 0']
+                    except:
+                        pass
+                    janela5 = tk.Toplevel()
+                    janela5.title('EDITAR EMAIL')
+                    janela5.geometry('400x290')
+                    janela5.configure( bg='#eee')
+                    janela5.resizable(width=False, height=False)
+                    
+                    n_entry = tk.Entry(janela5, width=20, justify='center')
+                    n_entry.place(x = 140, y = 100)
+
+                    def aplicar():
+                        novo = n_entry.get()
+                        lista.iat[numero, 5] = novo
+                        lista.to_excel('Central_de_funcionarios_T.xlsx')
+                        messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
+                        janela4.destroy()
+                        janela5.destroy()
+                        
+                    b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
+                    b_aplicar.place(x=155, y=160)
+                        
+                def editar_telefone():
+                    lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+                    try:
+                        del lista['Unnamed: 0']
+                    except:
+                        pass
+                    janela5 = tk.Toplevel()
+                    janela5.title('EDITAR TELEFONE')
+                    janela5.geometry('400x290')
+                    janela5.configure( bg='#eee')
+                    janela5.resizable(width=False, height=False)
+                    
+                    n_entry = tk.Entry(janela5, width=20, justify='center')
+                    n_entry.place(x = 140, y = 100)
+
+                    def aplicar():
+                        novo = n_entry.get()
+                        lista.iat[numero, 6] = novo
+                        lista.to_excel('Central_de_funcionarios_T.xlsx')
+                        messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
+                        janela4.destroy()
+                        janela5.destroy()
+                        
+                    b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
+                    b_aplicar.place(x=155, y=160)
+                        
+                def editar_salario():
+                    lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+                    try:
+                        del lista['Unnamed: 0']
+                    except:
+                        pass
+                    janela5 = tk.Toplevel()
+                    janela5.title('EDITAR SALÁRIO')
+                    janela5.geometry('400x290')
+                    janela5.configure( bg='#eee')
+                    janela5.resizable(width=False, height=False)
+                    
+                    n_entry = tk.Entry(janela5, width=20, justify='center')
+                    n_entry.place(x = 140, y = 100)
+
+                    def aplicar():
+                        novo = n_entry.get()
+                        lista.iat[numero, 7] = novo
+                        lista.to_excel('Central_de_funcionarios_T.xlsx')
+                        messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
+                        janela4.destroy()
+                        janela5.destroy()
+                        
+                    b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
+                    b_aplicar.place(x=155, y=160)
+                        
+                def editar_funcao():
+                    lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+                    try:
+                        del lista['Unnamed: 0']
+                    except:
+                        pass
+                    janela5 = tk.Toplevel()
+                    janela5.title('EDITAR FUNÇÃO')
+                    janela5.geometry('400x290')
+                    janela5.configure( bg='#eee')
+                    janela5.resizable(width=False, height=False)
+                    
+                    n_entry = tk.Entry(janela5, width=20, justify='center')
+                    n_entry.place(x = 140, y = 100)
+
+                    def aplicar():
+                        novo = n_entry.get()
+                        lista.iat[numero, 8] = novo
+                        lista.to_excel('Central_de_funcionarios_T.xlsx')
+                        messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
+                        janela4.destroy()
+                        janela5.destroy()
+                        
+                    b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
+                    b_aplicar.place(x=155, y=160)
+                        
+                def editar_contratacao():
+                    lista = pd.read_excel('Central_de_funcionarios_T.xlsx')
+                    try:
+                        del lista['Unnamed: 0']
+                    except:
+                        pass
+                    janela5 = tk.Toplevel()
+                    janela5.title('EDITAR CONTRATAÇÃO')
+                    janela5.geometry('400x290')
+                    janela5.configure( bg='#eee')
+                    janela5.resizable(width=False, height=False)
+                    
+                    n_entry = tk.Entry(janela5, width=20, justify='center')
+                    n_entry.place(x = 140, y = 100)
+
+                    def aplicar():
+                        novo = n_entry.get()
+                        lista.iat[numero, 9] = novo
+                        lista.to_excel('Central_de_funcionarios_T.xlsx')
+                        messagebox.showinfo( title='Sucesso', message=f'{nome} foi editado com sucesso!')
+                        janela4.destroy()
+                        janela5.destroy()
+                        
+                    b_aplicar = atk.Button3d(janela5, text='Aplicar', bg='#000', command=aplicar)
+                    b_aplicar.place(x=155, y=160)
                     
                 # Frame cima 1 -----------------------------------------------------------
 
@@ -256,28 +470,28 @@ def Procurar():
                 n_button = atk.Button3d(frame2, text='Nome*', bg='#000', command=editar_nome)
                 n_button.place(x=55, y=49)
 
-                i_button = atk.Button3d(frame2, text='Idade*', bg='#000')
+                i_button = atk.Button3d(frame2, text='Idade*', bg='#000', command=editar_idade)
                 i_button.place(x=55, y=95)
                 
-                cpf_button = atk.Button3d(frame2, text='CPF*', bg='#000')
+                cpf_button = atk.Button3d(frame2, text='CPF*', bg='#000', command=editar_cpf)
                 cpf_button.place(x=55, y=150)
                 
-                e_button = atk.Button3d(frame2, text='Endereço*', bg='#000')
+                e_button = atk.Button3d(frame2, text='Endereço*', bg='#000', command=editar_endereco)
                 e_button.place(x=55, y=205)
                 
-                em_button = atk.Button3d(frame2, text='E-mail*', bg='#000')
+                em_button = atk.Button3d(frame2, text='E-mail*', bg='#000', command=editar_email)
                 em_button.place(x=55, y=260)
                 
-                t_button = atk.Button3d(frame2, text='Telefone*', bg='#000')
+                t_button = atk.Button3d(frame2, text='Telefone*', bg='#000', command=editar_telefone)
                 t_button.place(x=55, y=315)
                 
-                s_button = atk.Button3d(frame2, text='Salario*', bg='#000')
+                s_button = atk.Button3d(frame2, text='Salario*', bg='#000', command=editar_salario)
                 s_button.place(x=245, y=49)
 
-                f_button = atk.Button3d(frame2, text='Função*', bg='#000')
+                f_button = atk.Button3d(frame2, text='Função*', bg='#000', command=editar_funcao)
                 f_button.place(x=245, y=95)
                 
-                c_button = atk.Button3d(frame2, text='Contratação*', bg='#000')
+                c_button = atk.Button3d(frame2, text='Contratação*', bg='#000', command=editar_contratacao)
                 c_button.place(x=245, y=150)
 
                 # Frame baixo 1 -----------------------------------------------------------
