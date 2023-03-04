@@ -4,6 +4,8 @@ from tkinter import *
 import awesometkinter as atk
 from os import replace
 from tkinter import messagebox
+import smtplib
+import email.message
 
 
 # Criando janela -------------------------------------------------------
@@ -521,6 +523,92 @@ def Procurar():
     l_rodape= Label(frame3, bg='#000', fg='#fff', text='created by Edmar Lelis L. JR.', font='Alereya 8 bold italic')
     l_rodape.place(x=120, y=10)
 
+# contato  -----------------------------------------------------------
+
+def Contato():
+    
+    janela6 = tk.Toplevel()
+    janela6.title('Contato')
+    janela6.geometry('400x490')
+    janela6.configure( bg='#fff')
+    janela6.resizable(width=False, height=False)
+    
+    
+    # Frame cima 4 -----------------------------------------------------------
+
+    frame1 = Frame(janela6, width=400, height=49, bg='#000')
+    frame1.place(x=0, y=0)
+    l_titulo = Label(frame1, text='Contato', bg='#000', fg='#fff', font='Anton 16 bold')
+    l_titulo.place(x=150, y=14)
+
+    # Frame meio 4 -----------------------------------------------------------
+
+    frame2 = Frame(janela6, width=400, height=401, bg='#eee')
+    frame2.place(x=0, y=49)
+    
+    info = tk.Label(frame2, text=
+    """Olá! Eu me chamo Edmar Lelis;
+Nasci em 2004 e programo desde muito novo;
+        Sou um programador do DF; 
+Caso queira me contatar diretamente use este email:
+      edmarlelis.lourenco@gmail.com.
+    """, bg='#eee', fg='#000', font='Anton 8 bold')
+    info.place(x=50, y=10)
+    
+    gmail_l= tk.Label(frame2, text="Seu gmail:", bg='#eee', fg='#000', font='Anton 8')
+    gmail_l.place(x=10, y=100)
+    
+    gmail_e = tk.Entry(frame2, width=40, justify="center")
+    gmail_e.place(x=10, y = 120)
+    
+    email_l= tk.Label(frame2, text="Mensagem:", bg='#eee', fg='#000', font='Anton 8')
+    email_l.place(x=10, y=150)
+    
+    email_t = tk.Text(frame2)
+    email_t.place(x=10, y=170, width=380, height=160)
+    
+    
+    # enviar email -------------------------------------------------------
+    
+    def enviar_email():  
+        try:
+            corpo_email = f"""
+            <p>email de resposta: {gmail_e.get()}</p>
+            <p>Mensagem:</p>
+            <p>{email_t.get(1.0, "end-1c")}</p>
+            """
+
+            msg = email.message.Message()
+            msg['Subject'] = "Contato pelo app de Gerenciamento de Funcionarios."
+            msg['From'] = 'projetocontato956@gmail.com'
+            msg['To'] = 'projetocontato956@gmail.com'
+            password = 'parcozwvqkzqgbch' 
+            msg.add_header('Content-Type', 'text/html')
+            msg.set_payload(corpo_email )
+
+            s = smtplib.SMTP('smtp.gmail.com: 587')
+            s.starttls()
+            # Login Credentials for sending the mail
+            s.login(msg['From'], password)
+            s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+            messagebox.showinfo( title='Sucesso', message='Seu email foi enviado com sucesso!')
+        except:
+            messagebox.showerror( title='Falha!', message='Seu email Não foi enviado! É possivel que esta opção não esteja mais ativa por motivos de segurança, pois o codigo desta aplicação é publico')
+
+
+
+    contato = atk.Button3d(frame2, text= 'Enviar', bg='#000', fg='#fff', command= enviar_email)
+    contato.place(x=160, y=334)
+
+    # Frame baixo 4 -----------------------------------------------------------
+
+    frame3 = Frame(janela6, width=400, height=40, bg='#000')
+    frame3.place(x=0, y=450)
+
+    l_rodape= Label(frame3, bg='#000', fg='#fff', text='created by Edmar Lelis L. JR.', font='Alereya 8 bold italic')
+    l_rodape.place(x=120, y=10)
+    
+
 
 # Frame cima 1 -----------------------------------------------------------
 
@@ -540,7 +628,7 @@ cadatrar.place(x=160, y=64)
 procurar = atk.Button3d(frame2, text= 'Procurar', bg='#000', fg='#fff', command= Procurar)
 procurar.place(x=160, y=164)
 
-contato = atk.Button3d(frame2, text= 'Contato', bg='#000', fg='#fff', command= Cadastrar)
+contato = atk.Button3d(frame2, text= 'Contato', bg='#000', fg='#fff', command= Contato)
 contato.place(x=160, y=264)
 
 # Frame baixo 1 -----------------------------------------------------------
